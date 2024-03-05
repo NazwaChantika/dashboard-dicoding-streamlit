@@ -4,8 +4,8 @@ import seaborn as sb
 import streamlit as st
 
 # Load data
-jam_df = pd.read_csv("jam.csv")
-hari_df = pd.read_csv("hari.csv")
+jam_df = pd.read_csv("https://raw.githubusercontent.com/NazwaChantika/dashboard-dicoding-streamlit/main/Dashboard/jam.csv")
+hari_df = pd.read_csv("https://raw.githubusercontent.com/NazwaChantika/dashboard-dicoding-streamlit/main/Dashboard/hari.csv")
 
 # Function to plot bike rental count by weather situation
 def plot_bike_rental_by_weather(df, title):
