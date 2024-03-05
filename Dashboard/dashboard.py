@@ -14,18 +14,21 @@ def plot_bike_rental_by_weather(df, title):
         "cnt": "count_sewa"
     }, inplace=True)
 
-    colors = ["#FFA500", "#D3D3D3", "#D3D3D3", "#D3D3D3", "#D3D3D3"]
+    colors = ["#FFA500", "#D3D3D3", "#D3D3D3", "#D3D3D3"]
     plt.figure(figsize=(10,5))
     sb.barplot(
         y="count_sewa",
         x="weathersit",
         data=musim_df.sort_values(by="count_sewa", ascending=False),
-        palette=colors
+        palette=colors,
+        hue='weathersit',
+        legend=False  # Set legend to False
     )
     plt.title(title, loc="center", fontsize=15)
     plt.xlabel("Musim")
     plt.ylabel("Banyak Sepeda disewa")
     st.pyplot()
+
 
 # Function to display statistics of bike usage by weekday and holiday
 def display_bike_usage_statistics(df, title):
