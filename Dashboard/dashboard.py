@@ -29,22 +29,42 @@ def plot_bike_rental_by_weather(df, title):
     ax.set_ylabel("Banyak Sepeda disewa")
     st.pyplot(fig)
 
-# Function to display statistics of bike usage by weekday and holiday
-def display_bike_usage_statistics(df, title):
-    statistik_penggunaan = df.groupby(['weekday', 'holiday']).agg({
-        "registered": ["sum", "max", "min"],
-        "casual": ["sum", "max", "min"]
-    }).reset_index()
+# Function to plot bike usage statistics by weekday and holiday
+def plot_bike_usage_statistics(df, title):
+    fig, axes = plt.subplots(nrows=2, ncols=2, figsize=(14, 10))
 
-    st.write(title)
-    st.write(statistik_penggunaan)
+    # Plot registered users
+    sb.barplot(x="weekday", y=("registered", "sum"), hue="holiday", data=df, ax=axes[0, 0])
+    axes[0, 0].set_title("Registered Users - Total")
+    axes[0, 0].set_xlabel("Weekday")
+    axes[0, 0].set_ylabel("Total Registered Users")
 
-# Main part of the Streamlit app
-st.title("Bike Rental Dashboard")
-st.header("Banyakya Jumlah Sepeda yang disewa pada setiap Musim")
-plot_bike_rental_by_weather(jam_df, "Jumlah Sepeda yang Disewa Berdasarkan Musim (Jam)")
-plot_bike_rental_by_weather(hari_df, "Jumlah Sepeda yang Disewa Berdasarkan Musim (Hari)")
+    # Plot casual users
+    sb.barplot(x="weekday", y=("casual", "sum"), hue="holiday", data=df, ax=axes[0, 1])
+    axes[0, 1].set_title("Casual Users - Total")
+    axes[0, 1].set_xlabel("Weekday")
+    axes[0, 1].set_ylabel("Total Casual Users")
 
-# Display bike usage statistics by weekday and holiday
-display_bike_usage_statistics(jam_df, "Statistik Penggunaan Sepeda (Jam)")
-display_bike_usage_statistics(hari_df, "Statistik Penggunaan Sepeda (Hari)")
+    # Plot max registered users
+    sb.barplot(x="weekday", y=("registered", "max"), hue="holiday", data=df, ax=axes[1, 0])
+    axes[1, 0].set_title("Registered Users - Max")
+    axes[1, 0].set_xlabel("Weekday")
+    axes[1, 0].set_ylabel("Max Registered Users")
+
+    # Plot max casual users
+    sb.barplot(x="weekday", y=("casual", "max"), hue="holiday", data=df, ax=axes[1, 1])
+    axes[1, 1].set_title("Casual Users - Max")
+    axes[1, 1].set_xlabel("Weekday")
+    axes[1, 1].set_ylabel("Max Casual Users")
+
+    plt.tight_layout()
+    st.pyplot(fig)
+
+# Plot bike usage statistics for jam_df
+st.header("Statistik Penggunaan Sepeda (Jam)")
+plot_bike_usage_statistics(statistik_penggunaan_jam, "Statistik Penggunaan Sepeda (Jam)")
+
+# Plot bike usage statistics for hari_df
+st.header("Statistik Penggunaan Sepeda (Hari)")
+plot_bike_usage_statistics(statistik_penggunaan_hari, "Statistik Penggunaan Sepeda (Hari)")
+
