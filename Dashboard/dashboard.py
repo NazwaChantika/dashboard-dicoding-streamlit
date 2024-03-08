@@ -12,14 +12,16 @@ def plot_bike_rental_by_weather(df, title):
     musim_df = df.groupby(by="weathersit").cnt.nunique().reset_index()
     musim_df.rename(columns={"cnt": "count_sewa"}, inplace=True)
 
-    colors = ["#FFA500", "#D3D3D3", "#D3D3D3", "#D3D3D3", "#D3D3D3"]
+    colors = ["#FFA500", "#D3D3D3", "#D3D3D3", "#D3D3D3"]
     fig, ax = plt.subplots(figsize=(10, 5))
     sb.barplot(
         y="count_sewa",
         x="weathersit",
+        hue="weathersit",
         data=musim_df.sort_values(by="count_sewa", ascending=False),
         palette=colors,
-        ax=ax
+        ax=ax,
+        legend = False
     )
     ax.set_title(title, loc="center", fontsize=15)
     ax.set_xlabel("Musim")
