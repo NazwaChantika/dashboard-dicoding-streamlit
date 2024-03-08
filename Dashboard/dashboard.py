@@ -65,11 +65,15 @@ def display_bike_usage_statistics(df, title):
 # Main part of the Streamlit app
 st.title("Bike Rental Dashboard")
 st.header("Banyaknya Jumlah Sepeda yang disewa pada setiap Musim")
+st.subheader("Jam")
 plot_bike_rental_by_weather(jam_df, "Jumlah Sepeda yang Disewa Berdasarkan Musim (Jam)")
+st.subheader("Hari")
 plot_bike_rental_by_weather(hari_df, "Jumlah Sepeda yang Disewa Berdasarkan Musim (Hari)")
 
 st.header("Statistik Penggunaan Sepeda")
+st.subheader("Statistik Penggunaan Sepeda di Weekday dan Holiday (Jam)")
 display_bike_usage_statistics(jam_df, "Statistik Penggunaan Sepeda di Weekday dan Holiday (Jam)")
+st.subheader("Statistik Penggunaan Sepeda di Weekday dan Holiday(Hari)")
 display_bike_usage_statistics(hari_df, "Statistik Penggunaan Sepeda di Weekday dan Holiday(Hari)")
 
 
