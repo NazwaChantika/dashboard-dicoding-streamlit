@@ -1,3 +1,4 @@
+import seaborn as sb
 import pandas as pd
 import matplotlib.pyplot as plt
 import streamlit as st
@@ -68,11 +69,5 @@ plot_bike_rental_by_weather(hari_df, "Jumlah Sepeda yang Disewa Berdasarkan Musi
 st.header("Statistik Penggunaan Sepeda")
 display_bike_usage_statistics(jam_df, "Statistik Penggunaan Sepeda (Jam)")
 
-# Mengelompokkan data berdasarkan weekday dan holiday, lalu menghitung statistiknya
-statistik_penggunaan = hari_df.groupby(['weekday', 'holiday']).agg({
-    "registered": ["sum", "max", "min"],
-    "casual": ["sum", "max", "min"]
-}).reset_index()
 
-st.write("Statistik Penggunaan Sepeda (Hari)")
-st.write(statistik_penggunaan)
+
