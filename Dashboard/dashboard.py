@@ -31,6 +31,11 @@ def plot_bike_rental_by_weather(df, title):
 
 # Function to plot bike usage statistics by weekday and holiday
 def plot_bike_usage_statistics(df, title):
+     statistik_penggunaan = df.groupby(['weekday', 'holiday']).agg({
+        "registered": ["sum", "max", "min"],
+        "casual": ["sum", "max", "min"]
+    }).reset_index()
+    
     fig, axes = plt.subplots(nrows=2, ncols=2, figsize=(14, 10))
 
     # Plot registered users
