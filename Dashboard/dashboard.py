@@ -1,4 +1,3 @@
-import seaborn as sb
 import pandas as pd
 import matplotlib.pyplot as plt
 import streamlit as st
@@ -69,24 +68,11 @@ plot_bike_rental_by_weather(hari_df, "Jumlah Sepeda yang Disewa Berdasarkan Musi
 st.header("Statistik Penggunaan Sepeda")
 display_bike_usage_statistics(jam_df, "Statistik Penggunaan Sepeda (Jam)")
 
+# Mengelompokkan data berdasarkan weekday dan holiday, lalu menghitung statistiknya
+statistik_penggunaan = hari_df.groupby(['weekday', 'holiday']).agg({
+    "registered": ["sum", "max", "min"],
+    "casual": ["sum", "max", "min"]
+}).reset_index()
 
-# Load data
-jam_df = pd.read_csv("https://raw.githubusercontent.com/NazwaChantika/dashboard-dicoding-streamlit/main/Dashboard/jam.csv")
-hari_df = pd.read_csv("https://raw.githubusercontent.com/NazwaChantika/dashboard-dicoding-streamlit/main/Dashboard/hari.csv")
-
-
-# Function to display statistics of bike usage by weekday and holiday
-def display_bike_usage_statistics(df, title):
-    statistik_penggunaan = df.groupby(['weekday', 'holiday']).agg({
-        "registered": ["sum", "max", "min"],
-        "casual": ["sum", "max", "min"]
-    }).reset_index()
-
-    st.write(title)
-    st.write(statistik_penggunaan)
-
-# Main part of the Streamlit app
-st.title("Bike Rental Dashboard")
-st.header("Banyakya Jumlah Sepeda yang disewa pada setiap Musim")
-plot_bike_rental_by_weather(jam_df, "Jumlah Sepeda yang Disewa Berdasarkan Musim (Jam)")
-plot_bike_rental_by_weather(hari_df, "Jumlah Sepeda yang Disewa Berdasarkan Musim (Hari)")
+st.write("Statistik Penggunaan Sepeda (Hari)")
+st.write(statistik_penggunaan)
