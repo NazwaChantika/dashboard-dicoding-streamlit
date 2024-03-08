@@ -1,6 +1,5 @@
-import seaborn as sb
-import pandas as pd
 import matplotlib.pyplot as plt
+import pandas as pd
 import streamlit as st
 
 # Load data
@@ -70,30 +69,17 @@ st.header("Statistik Penggunaan Sepeda")
 display_bike_usage_statistics(jam_df, "Statistik Penggunaan Sepeda (Jam)")
 
 # Mengelompokkan data berdasarkan weekday dan holiday, lalu menghitung statistiknya
-statistik_penggunaan = hari_df.groupby(['weekday', 'holiday']).agg({
+statistik_penggunaan_hari = hari_df.groupby(['weekday', 'holiday']).agg({
     "registered": ["sum", "max", "min"],
     "casual": ["sum", "max", "min"]
 }).reset_index()
-
-st.write("Statistik Penggunaan Sepeda (Jam)")
-st.write(statistik_penggunaan)
 
 # Visualisasi untuk statistik penggunaan sepeda berdasarkan hari
 fig, axes = plt.subplots(nrows=2, ncols=3, figsize=(15, 10))
 
 for i, (stat, color) in enumerate(zip(["sum", "max", "min"], ['b', 'g', 'r'])):
     ax = axes[0, i]
-    ax.bar(statistik_penggunaan.index, statistik_penggunaan["registered"][stat], color=color)
-    ax.set_xticks(statistik_penggunaan.index)
-    ax.set_xticklabels(statistik_penggunaan['weekday'])
-    ax.set_title(f"Registered {stat.capitalize()}")
-
-for i, (stat, color) in enumerate(zip(["sum", "max", "min"], ['b', 'g', 'r'])):
-    ax = axes[1, i]
-    ax.bar(statistik_penggunaan.index, statistik_penggunaan["casual"][stat], color=color)
-    ax.set_xticks(statistik_penggunaan.index)
-    ax.set_xticklabels(statistik_penggunaan['weekday'])
-    ax.set_title(f"Casual {stat.capitalize()}")
-
-plt.tight_layout()
-plt.show()
+    ax.bar(statistik_penggunaan_hari.index, statistik_penggunaan_hari["registered"][stat], color=color)
+    ax.set_xticks(statistik_penggunaan_hari.index)
+    ax.set_xticklabels(statistik_penggunaan_hari['weekday'])
+    ax.set
