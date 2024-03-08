@@ -67,7 +67,7 @@ plot_bike_rental_by_weather(jam_df, "Jumlah Sepeda yang Disewa Berdasarkan Musim
 plot_bike_rental_by_weather(hari_df, "Jumlah Sepeda yang Disewa Berdasarkan Musim (Hari)")
 
 st.header("Statistik Penggunaan Sepeda")
-display_bike_usage_statistics(jam_df, "Statistik Penggunaan Sepeda (Jam)")
+display_bike_usage_statistics(jam_df, "Statistik Penggunaan Sepeda di Weekday dan Holiday (Jam)")
+display_bike_usage_statistics(hari_df, "Statistik Penggunaan Sepeda di Weekday dan Holiday(Hari)")
 
-st.header("Statistik Penggunaan Sepeda")
-display_bike_usage_statistics(jam_df, "Statistik Penggunaan Sepeda (Hari)")
+
